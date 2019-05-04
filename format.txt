@@ -1,0 +1,28 @@
+
+
+[03-21 17:30:32.969][D][xc_cell.c:608][xc_cell_add_child][17056]: 'preference' add child 'net':'0x18870FB8' of 'default'.
+[03-21 17:30:32.969][D][xc_cell.c:608][xc_cell_add_child][17056]: 'preference' add child 'misc':'0x188A0FB8' of 'default'.
+[03-21 17:30:32.970][D][xc_cell.c:608][xc_cell_add_child][17056]: 'core' add child 'device':'0x188C2FB8' of 'device_root'.
+[03-21 17:30:32.971][D][xc_cell.c:608][xc_cell_add_child][17056]: 'device' add child 'camera':'0x1890EFB8' of 'default'.
+[03-21 17:30:32.971][D][xc_cell.c:608][xc_cell_add_child][17056]: 'device' add child 'mic':'0x189A4FB8' of 'default'.
+
+
+
+INSERT INTO LOG_FORMAT VALUES (%d,'%s','%s','%s',%d,'%d;%s');
+name 
+xcast-log  
+
+regex
+\[(\d\d-\d\d\s\d\d:\d\d:\d\d\.\d\d\d)\]\[(.)\]\[(.*)\]\[(.*)\]\[(.*)\]:(.*)
+
+column_name
+Time;Level;File;Function;Pid;Message
+
+index_column_interval
+0
+
+index_column_level
+1
+
+level_text
+V;D;I;W;E
