@@ -44,6 +44,8 @@
 #define ID_RCLICK_INTERVAL_FROM         40000
 #define ID_RCLICK_INTERVAL_TO           40001
 #define ID_RCLICK_MORE_INFO             40002
+#define ID_RCLICK_FIND_TEXT             40003
+#define ID_COPY_EDIT                    45000
 
 // Next default values for new objects
 // 

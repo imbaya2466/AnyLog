@@ -42,6 +42,10 @@ public:
     COMMAND_ID_HANDLER(ID_RCLICK_INTERVAL_FROM, OnRclickMenu)
     COMMAND_ID_HANDLER(ID_RCLICK_INTERVAL_TO, OnRclickMenu)
     COMMAND_ID_HANDLER(ID_RCLICK_MORE_INFO, OnRclickMenu)
+    COMMAND_ID_HANDLER(ID_RCLICK_FIND_TEXT, OnRclickMenu)
+    //copy edit
+    COMMAND_CODE_HANDLER(EN_KILLFOCUS, OnEnKillfocusEdit)
+    NOTIFY_CODE_HANDLER(EN_MSGFILTER, OnNMRclickCopyEdit)
   END_MSG_MAP()
 
 // Handler prototypes (uncomment arguments if needed):
@@ -58,8 +62,8 @@ public:
   CButton      search_button_;
 
   CListViewCtrl list_;
-  CEdit        copy_edit_;
-
+  CRichEditCtrl copy_edit_;
+  
   MiddleLayer	control_;			
   HANDLE h_thread_ = 0;					
   HANDLE mutex_ = 0;						
@@ -82,7 +86,8 @@ public:
   LRESULT OnNMDblclkList(int /*idCtrl*/, LPNMHDR pNMHDR, BOOL& /*bHandled*/);
   LRESULT OnNMRclickViewList(int /*idCtrl*/, LPNMHDR pNMHDR, BOOL& /*bHandled*/);
   LRESULT OnRclickMenu(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/, BOOL& /*bHandled*/);
-
+  LRESULT OnEnKillfocusEdit(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/, BOOL& /*bHandled*/);
+  LRESULT OnNMRclickCopyEdit(int /*idCtrl*/, LPNMHDR pNMHDR, BOOL& /*bHandled*/);
   void ScrollTo(int line);
   void SetBackgroundColour(COLORREF in_colour);
   

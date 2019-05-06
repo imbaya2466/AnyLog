@@ -271,10 +271,6 @@ LRESULT CView::OnNMCustomdrawList(int, LPNMHDR pNMHDR, BOOL &)
 
 }
 
-LRESULT CView::OnNMDblclkList(int, LPNMHDR pNMHDR, BOOL &)
-{
-  return 0;
-}
 
 void CView::ScrollTo(int line)
 {
@@ -291,12 +287,19 @@ void CView::SetBackgroundColour(COLORREF in_colour)
   list_.SetBkColor(in_colour);
 }
 
-static int rclick_choose;
+static std::vector<int> rclick_choose;
+static int focused;
 LRESULT CView::OnNMRclickViewList(int idCtrl, LPNMHDR pNMHDR, BOOL& /*bHandled*/)
 {
   LPNMITEMACTIVATE lpnmitem = (LPNMITEMACTIVATE)pNMHDR;
 
-  rclick_choose = list_.GetNextItem(-1, LVNI_FOCUSED);
+  focused = lpnmitem->iItem;
+  rclick_choose.clear();
+  int index_choose = list_.GetNextItem(-1, LVIS_SELECTED);
+  while (index_choose != -1) {
+    rclick_choose.push_back(index_choose);
+    index_choose = list_.GetNextItem(index_choose, LVIS_SELECTED);
+  }
 
   CMenuHandle menumain = LoadMenu(NULL, MAKEINTRESOURCE(IDR_RCLICK_MENU));
   CMenuHandle rclick_menu = menumain.GetSubMenu(0);
@@ -312,24 +315,33 @@ LRESULT CView::OnNMRclickViewList(int idCtrl, LPNMHDR pNMHDR, BOOL& /*bHandled*/
   rclick_menu.AppendMenuA(MF_STRING, ID_RCLICK_MORE_INFO,"more info");
 
   POINT pt = lpnmitem->ptAction;
-  ClientToScreen(&pt);
+  list_.ClientToScreen(&pt);
   rclick_menu.TrackPopupMenu(TPM_LEFTALIGN | TPM_TOPALIGN | TPM_RIGHTBUTTON,
     pt.x,
-    pt.y + 50,
+    pt.y ,
     (HWND)m_hWnd);
   menumain.DestroyMenu();
 
   return 0;
 }
 
+
+static std::string copy_edit_choose;
+
 LRESULT CView::OnRclickMenu(WORD, WORD id, HWND, BOOL &)
 {
+  std::vector<Log*> choose_log;//rclick_choose
   WaitForSingleObject(mutex_, INFINITE);
-  Log &log = control_.GetLog(rclick_choose);
+  for (auto i : rclick_choose) {
+    choose_log.push_back(&control_.GetLog(i));
+  }
+  Log focused_log = control_.GetLog(focused);
   ReleaseMutex(mutex_);  
   switch (id) {
     case ID_RCLICK_MARK: {
-      log.mark = !log.mark;
+      for (auto i : choose_log) {
+        i->mark = !i->mark;
+      }
       break;
     }
     case ID_RCLICK_COPY: {
@@ -339,7 +351,7 @@ LRESULT CView::OnRclickMenu(WORD, WORD id, HWND, BOOL &)
     }
     case ID_RCLICK_INTERVAL_FROM: {
       WaitForSingleObject(mutex_, INFINITE);
-      control_.AddInterval(log.GetMember(format_.index_column_interval));
+      control_.AddInterval(focused_log.GetMember(format_.index_column_interval));
       control_.RefreshFilter();
       ReleaseMutex(mutex_);
 
@@ -352,7 +364,7 @@ LRESULT CView::OnRclickMenu(WORD, WORD id, HWND, BOOL &)
     }
     case ID_RCLICK_INTERVAL_TO: {
       WaitForSingleObject(mutex_, INFINITE);
-      control_.AddInterval("", log.GetMember(format_.index_column_interval));
+      control_.AddInterval("", focused_log.GetMember(format_.index_column_interval));
       control_.RefreshFilter();
       ReleaseMutex(mutex_);
 
@@ -364,10 +376,83 @@ LRESULT CView::OnRclickMenu(WORD, WORD id, HWND, BOOL &)
       break;
     }
     case ID_RCLICK_MORE_INFO: {
-      LogMoreInfoDlg dlg(log);
+      LogMoreInfoDlg dlg(focused_log);
       dlg.DoModal();
+      list_.SetFocus();
+      break;
+    }
+    case ID_RCLICK_FIND_TEXT: {
+      WaitForSingleObject(mutex_, INFINITE);
+      control_.SetFilterWholeKey(copy_edit_choose);
+      control_.RefreshFilter();
+      ReleaseMutex(mutex_);
+
+      showed_num_ = control_.Size();
+      list_.SetItemCount(showed_num_);
+      ScrollTo(0);
+      list_.SetFocus();
       break;
     }
   }
+  return 0;
+}
+
+
+LRESULT CView::OnNMDblclkList(int, LPNMHDR pNMHDR, BOOL &)
+{
+  LPNMITEMACTIVATE lpnmitem = (LPNMITEMACTIVATE)pNMHDR;
+  CRect rc;
+  LVITEMINDEX itemindex{ lpnmitem->iItem ,0 };
+  list_.GetItemIndexRect(&itemindex, lpnmitem->iSubItem, LVIR_BOUNDS, &rc);
+  list_.ClientToScreen(rc);
+  copy_edit_.Create(this->m_hWnd, rc, "", WS_POPUP | WS_VISIBLE | WS_TABSTOP);
+  copy_edit_.SetBackgroundColor(list_.GetBkColor());
+  copy_edit_.SetFont(list_.GetFont());
+
+  Log log = control_.GetLog(lpnmitem->iItem);
+  copy_edit_choose = " ";
+  if (lpnmitem->iSubItem) {
+    copy_edit_choose += log.GetMember(lpnmitem->iSubItem - 1);
+  }else {
+    copy_edit_choose += std::to_string(lpnmitem->iItem);
+  }
+  copy_edit_.AppendText(copy_edit_choose.c_str());
+  copy_edit_.SetEventMask(ENM_SELCHANGE| ENM_MOUSEEVENTS);
+  copy_edit_.SetSelAll();
+  return 0;
+}
+
+LRESULT CView::OnEnKillfocusEdit(WORD wNotifyCode, WORD wID, HWND hWndCtl, BOOL& bHandled)
+{
+  if (copy_edit_.IsWindow()) {
+    copy_edit_.DestroyWindow();
+  }
+  return 0;
+}
+
+LRESULT CView::OnNMRclickCopyEdit(int idCtrl, LPNMHDR pNMHDR, BOOL& bHandled)
+{
+  MSGFILTER *Param = (MSGFILTER *)pNMHDR;
+  
+  if (Param->msg== WM_RBUTTONDOWN) {
+    LONG from, to;
+    copy_edit_.GetSel(from, to);
+    copy_edit_choose = copy_edit_choose.substr(from, to - from);
+
+    POINT pt;
+    pt.x = GET_X_LPARAM(Param->lParam);
+    pt.y = GET_Y_LPARAM(Param->lParam);
+    copy_edit_.ClientToScreen(&pt);
+    CMenuHandle menumain = LoadMenu(NULL, MAKEINTRESOURCE(IDR_RCLICK_MENU));
+    CMenuHandle rclick_menu = menumain.GetSubMenu(0);
+    rclick_menu.AppendMenuA(MF_STRING, ID_RCLICK_FIND_TEXT, "find text");
+    rclick_menu.TrackPopupMenu(TPM_LEFTALIGN | TPM_TOPALIGN | TPM_RIGHTBUTTON,
+      pt.x,
+      pt.y,
+      (HWND)m_hWnd);
+    menumain.DestroyMenu();
+  }
+
+
   return 0;
 }
