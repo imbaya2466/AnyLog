@@ -107,6 +107,27 @@ LRESULT CView::OnSize(UINT, WPARAM, LPARAM, BOOL &)
   return 0;
 }
 
+LRESULT CView::OnKeyDown(int idCtrl, LPNMHDR pNMHDR, BOOL& bHandled)
+{
+  LPNMLVKEYDOWN pnkd = (LPNMLVKEYDOWN)pNMHDR;
+  switch (pnkd->wVKey) {
+    // F
+    case 0x46: {
+      // TODO: more find dlg
+
+      break;
+    }
+    // A
+    case 0x41: {
+        list_.SetItemState(-1, LVIS_SELECTED, LVIS_SELECTED);
+      break;
+    }
+  }
+
+  // retun true will not be processed elsewhere 
+  return true;
+}
+
 LRESULT CView::OnLvnGetdispinfoList(int, LPNMHDR pNMHDR, BOOL &)
 {
   NMLVDISPINFO *lpdi = reinterpret_cast<NMLVDISPINFO*>(pNMHDR);
@@ -287,6 +308,7 @@ void CView::SetBackgroundColour(COLORREF in_colour)
   list_.SetBkColor(in_colour);
 }
 
+//not Global var  these var only used in this moudle
 static std::vector<int> rclick_choose;
 static int focused;
 LRESULT CView::OnNMRclickViewList(int idCtrl, LPNMHDR pNMHDR, BOOL& /*bHandled*/)
@@ -312,6 +334,7 @@ LRESULT CView::OnNMRclickViewList(int idCtrl, LPNMHDR pNMHDR, BOOL& /*bHandled*/
       (format_.column_name[format_.index_column_interval] + " to this").c_str());
     rclick_menu.AppendMenuA(MF_SEPARATOR);
   }
+  rclick_menu.AppendMenuA(MF_STRING, ID_RCLICK_ADDTO_EDIT, "add to find");
   rclick_menu.AppendMenuA(MF_STRING, ID_RCLICK_MORE_INFO,"more info");
 
   POINT pt = lpnmitem->ptAction;
@@ -393,6 +416,14 @@ LRESULT CView::OnRclickMenu(WORD, WORD id, HWND, BOOL &)
       list_.SetFocus();
       break;
     }
+    case ID_RCLICK_ADDTO_EDIT: {
+      search_edit_.SetSel(0, -1);
+      search_edit_.Clear();
+      for (int i = 0; i < focused_log.GetMemberNum(); i++) {
+        search_edit_.AppendText((focused_log.GetMember(i)+";").c_str());
+      }
+      break;
+    }
   }
   return 0;
 }
@@ -453,6 +484,20 @@ LRESULT CView::OnNMRclickCopyEdit(int idCtrl, LPNMHDR pNMHDR, BOOL& bHandled)
     menumain.DestroyMenu();
   }
 
+  return 0;
+}
 
+
+LRESULT CView::OnNMClickViewList(int /*idCtrl*/, LPNMHDR pNMHDR, BOOL& /*bHandled*/)
+{
+  LPNMITEMACTIVATE lpnmitem = (LPNMITEMACTIVATE)pNMHDR;
+  if (lpnmitem->iItem >= control_.Size()|| lpnmitem->iItem<0) {
+    return 0;
+  }
+  Log &log = control_.GetLog(lpnmitem->iItem);
+  std::string set = "Line:" + std::to_string(lpnmitem->iItem);
+  status_bar_.SetText(1, set.c_str());
+  set = "Length:" + std::to_string(log.get_log().size());
+  status_bar_.SetText(2, set.c_str());
   return 0;
 }

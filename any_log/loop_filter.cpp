@@ -74,9 +74,6 @@ void LoopFilter::MapMore()
         }
         int j = 0;
         for (; j < min_num; j++) {
-          if (j == format_.index_column_level || j == format_.index_column_interval) {
-            continue;
-          }
           if (ls.GetMember(j).find(inturn_key[j]) == std::string::npos) {
             break;
           }

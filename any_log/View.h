@@ -18,7 +18,8 @@ public:
 	BOOL PreTranslateMessage(MSG* pMsg);
 
 	virtual void OnFinalMessage(HWND /*hWnd*/);
-  CView(LogFormat &format, std::istream *pstream) :format_(format),pstream_(pstream), control_(format,*pstream){}
+  CView(LogFormat &format, std::istream *pstream, CStatusBarCtrl &status_bar) 
+    :format_(format),pstream_(pstream), control_(format,*pstream), status_bar_(status_bar){}
   ~CView();
 
 	BEGIN_MSG_MAP(CView)
@@ -27,6 +28,7 @@ public:
     //List message
     NOTIFY_HANDLER(IDC_VIEW_LIST, LVN_GETDISPINFO, OnLvnGetdispinfoList)
     NOTIFY_HANDLER(IDC_VIEW_LIST, LVN_ENDSCROLL, OnLvnEndScrollList)
+    NOTIFY_HANDLER(IDC_VIEW_LIST, LVN_KEYDOWN, OnKeyDown)
 	  //button
     COMMAND_HANDLER(IDC_VIEW_BUTTON, BN_CLICKED, OnBnClickedButton)
     //combo change
@@ -35,6 +37,7 @@ public:
     NOTIFY_HANDLER(IDC_VIEW_LIST, NM_CUSTOMDRAW, OnNMCustomdrawList)
     //left double click
     NOTIFY_HANDLER(IDC_VIEW_LIST, NM_DBLCLK, OnNMDblclkList)
+    NOTIFY_HANDLER(IDC_VIEW_LIST, NM_CLICK, OnNMClickViewList)
     //right click
     NOTIFY_HANDLER(IDC_VIEW_LIST, NM_RCLICK, OnNMRclickViewList)
     COMMAND_ID_HANDLER(ID_RCLICK_MARK, OnRclickMenu)
@@ -43,6 +46,7 @@ public:
     COMMAND_ID_HANDLER(ID_RCLICK_INTERVAL_TO, OnRclickMenu)
     COMMAND_ID_HANDLER(ID_RCLICK_MORE_INFO, OnRclickMenu)
     COMMAND_ID_HANDLER(ID_RCLICK_FIND_TEXT, OnRclickMenu)
+    COMMAND_ID_HANDLER(ID_RCLICK_ADDTO_EDIT, OnRclickMenu)
     //copy edit
     COMMAND_CODE_HANDLER(EN_KILLFOCUS, OnEnKillfocusEdit)
     NOTIFY_CODE_HANDLER(EN_MSGFILTER, OnNMRclickCopyEdit)
@@ -55,7 +59,7 @@ public:
 
 
 
-
+  CStatusBarCtrl &status_bar_;
   CComboBox    level_box_;
   CEdit        search_edit_;
   CButton      regex_check_;
@@ -78,6 +82,7 @@ public:
 
   LRESULT OnInitDialog(HWND hwndFocus, LPARAM lParam);
   LRESULT OnSize(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM /*lParam*/, BOOL& /*bHandled*/);
+  LRESULT OnKeyDown(int idCtrl, LPNMHDR pNMHDR, BOOL& bHandled);
   LRESULT OnLvnGetdispinfoList(int /*idCtrl*/, LPNMHDR pNMHDR, BOOL& /*bHandled*/);
   LRESULT OnLvnEndScrollList(int /*idCtrl*/, LPNMHDR pNMHDR, BOOL& /*bHandled*/);
   LRESULT OnBnClickedButton(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/, BOOL& /*bHandled*/);
@@ -91,4 +96,5 @@ public:
   void ScrollTo(int line);
   void SetBackgroundColour(COLORREF in_colour);
   
+  LRESULT OnNMClickViewList(int /*idCtrl*/, LPNMHDR pNMHDR, BOOL& /*bHandled*/);
 };

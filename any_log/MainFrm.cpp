@@ -46,6 +46,9 @@ LRESULT CMainFrame::OnCreate(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM /*lParam*/
 	AddSimpleReBarBand(hWndToolBar, NULL, TRUE);
 
 	CreateSimpleStatusBar();
+  status_bar_ = m_hWndStatusBar;//TODO! 
+  int parts[] = { 1000,1100,-1 };
+  status_bar_.SetParts(3,parts);
 
 	m_hWndClient = m_view.Create(m_hWnd, rcDefault, NULL, WS_CHILD | WS_VISIBLE | WS_CLIPSIBLINGS | WS_CLIPCHILDREN, WS_EX_CLIENTEDGE);
 
@@ -227,7 +230,7 @@ void CMainFrame::CteatFileTabView(std::string file)
   if (!(*pstream)) {
     return ;
   }
-  CView* pView = new CView(format_manage_.GetChooseFormat(), pstream);
+  CView* pView = new CView(format_manage_.GetChooseFormat(), pstream, status_bar_);
   pView->Create(m_view);
   m_view.AddPage(pView->m_hWnd, file.c_str(), -1, (void*)pView);
   pView->SetBackgroundColour(RGB(0xF2, 0xF3, 0xF5));

@@ -18,6 +18,7 @@ class CMainFrame :
 public:
 	DECLARE_FRAME_WND_CLASS(NULL, IDR_MAINFRAME)
 
+  CStatusBarCtrl status_bar_;
 	CTabView m_view;
 	CCommandBarCtrl m_CmdBar;
 	FormatManage format_manage_;
