@@ -16,4 +16,4 @@ index_column_level
 
 //same as read
 level_text
-V;D;I;W;E
+V;D;I;W;E;A
