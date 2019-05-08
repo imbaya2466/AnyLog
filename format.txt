@@ -14,5 +14,6 @@ index_column_interval
 index_column_level
 1
 
+//same as read
 level_text
 V;D;I;W;E;A
