@@ -15,4 +15,4 @@ index_column_level
 1
 
 level_text
-V;D;I;W;E
+V;D;I;W;E;S
