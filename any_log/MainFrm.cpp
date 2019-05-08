@@ -230,11 +230,45 @@ void CMainFrame::CteatFileTabView(std::string file)
   if (!(*pstream)) {
     return ;
   }
-  CView* pView = new CView(format_manage_.GetChooseFormat(), pstream, status_bar_);
-  pView->Create(m_view);
-  m_view.AddPage(pView->m_hWnd, file.c_str(), -1, (void*)pView);
-  pView->SetBackgroundColour(RGB(0xF2, 0xF3, 0xF5));
-  pView->RedrawWindow();
+
+  int num = 0;
+  std::string line;
+  std::regex format_regex;
+  try {
+    format_regex = std::regex(format_manage_.GetChooseFormat().regex);
+  }
+  catch (const std::regex_error& e) {
+    return;
+  }
+  bool has_line = false;
+  while (std::getline(*pstream, line)) {
+    num++;
+    if (num >= 50) {
+      has_line = false;
+      break;
+    }
+    if (regex_match(line, format_regex)) {
+      has_line = true;
+      break;
+    }
+  }
+
+  delete pstream;
+  if (has_line) {
+    std::ifstream *pstream = new std::ifstream();
+    pstream->open(file);
+
+    CView* pView = new CView(format_manage_.GetChooseFormat(), pstream, status_bar_);
+    pView->Create(m_view);
+    m_view.AddPage(pView->m_hWnd, file.c_str(), -1, (void*)pView);
+    pView->SetBackgroundColour(RGB(0xF2, 0xF3, 0xF5));
+    pView->RedrawWindow();
+  }
+  else {
+    FormatDlg dlg(format_manage_);
+    dlg.DoModal();
+    CteatFileTabView(file);
+  }
 }
 
 

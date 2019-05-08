@@ -70,9 +70,11 @@ LRESULT CView::OnInitDialog(HWND hwndFocus, LPARAM lParam)
 
   list_.InsertColumn(0, _T("Num"), LVCFMT_LEFT, 50, 0);
   int width[10] = { 150,50,150,150,50,700,100,100,100,100};
-  for (int i = 0; i < format_.column_name.size(); i++) {
+  int i = 0;
+  for (; i < format_.column_name.size()-1; i++) {
     list_.InsertColumn(i+1, format_.column_name[i].c_str(), LVCFMT_LEFT, width[i], i+1);
   }
+  list_.InsertColumn(i + 1, format_.column_name[i].c_str(), LVCFMT_LEFT, 700, i + 1);
 
   list_.SetItemCount(0);
   list_.SetExtendedListViewStyle(LVS_EX_FULLROWSELECT | LVS_EX_DOUBLEBUFFER | LVS_EX_UNDERLINEHOT | LVS_EX_ONECLICKACTIVATE);

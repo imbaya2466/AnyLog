@@ -14,6 +14,25 @@ index_column_interval
 index_column_level
 1
 
-//same as read
 level_text
-V;D;I;W;E;A
+V;D;I;W;E
+
+
+
+name 
+log  
+
+regex
+\[(\d\d-\d\d\s\d\d:\d\d:\d\d\.\d\d\d)\]\[(.)\]\[(.*)\]\[(.*)\]:(.*)
+
+column_name
+Time;Level;File;Pid;Message
+
+index_column_interval
+0
+
+index_column_level
+1
+
+level_text
+V;D;I;W;E
