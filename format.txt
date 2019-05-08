@@ -15,4 +15,8 @@ index_column_level
 1
 
 level_text
+<<<<<<< HEAD
 V;D;I;W;E;A
+=======
+V;D;I;W;E
+>>>>>>> 59946921ecaa4aadf09c1e7fe17a68434fe5f2c4
