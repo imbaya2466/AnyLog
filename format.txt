@@ -12,7 +12,7 @@ index_column_interval
 0
 
 index_column_level
-2
+3
 
 level_text
-V;D;I;W;E;A
+V;D;I;W;E;S
