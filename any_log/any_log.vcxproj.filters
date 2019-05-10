@@ -37,6 +37,9 @@
     <Filter Include="Header Files\lib">
       <UniqueIdentifier>{2b6c5d2f-afc3-4080-82b3-475108f7207d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\lib\WTL">
+      <UniqueIdentifier>{8b9f974a-fa3b-431d-8607-b9789565568e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -79,6 +82,12 @@
       <Filter>Source Files\Control</Filter>
     </ClCompile>
     <ClCompile Include="log_more_info_dlg.cpp">
+      <Filter>Source Files\View</Filter>
+    </ClCompile>
+    <ClCompile Include="filter_data_manage.cpp">
+      <Filter>Source Files\Control</Filter>
+    </ClCompile>
+    <ClCompile Include="search_data_dlg.cpp">
       <Filter>Source Files\View</Filter>
     </ClCompile>
   </ItemGroup>
@@ -132,6 +141,75 @@
       <Filter>Header Files\Model</Filter>
     </ClInclude>
     <ClInclude Include="log_more_info_dlg.h">
+      <Filter>Header Files\View</Filter>
+    </ClInclude>
+    <ClInclude Include="filter_data.h">
+      <Filter>Header Files\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="filter_data_manage.h">
+      <Filter>Header Files\Control</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\atlapp.h">
+      <Filter>Header Files\lib\WTL</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\atlcrack.h">
+      <Filter>Header Files\lib\WTL</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\atlctrls.h">
+      <Filter>Header Files\lib\WTL</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\atlctrlw.h">
+      <Filter>Header Files\lib\WTL</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\atlctrlx.h">
+      <Filter>Header Files\lib\WTL</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\atlddx.h">
+      <Filter>Header Files\lib\WTL</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\atldlgs.h">
+      <Filter>Header Files\lib\WTL</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\atldwm.h">
+      <Filter>Header Files\lib\WTL</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\atlfind.h">
+      <Filter>Header Files\lib\WTL</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\atlframe.h">
+      <Filter>Header Files\lib\WTL</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\atlgdi.h">
+      <Filter>Header Files\lib\WTL</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\atlmisc.h">
+      <Filter>Header Files\lib\WTL</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\atlprint.h">
+      <Filter>Header Files\lib\WTL</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\atlres.h">
+      <Filter>Header Files\lib\WTL</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\atlribbon.h">
+      <Filter>Header Files\lib\WTL</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\atlscrl.h">
+      <Filter>Header Files\lib\WTL</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\atlsplit.h">
+      <Filter>Header Files\lib\WTL</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\atltheme.h">
+      <Filter>Header Files\lib\WTL</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\atluser.h">
+      <Filter>Header Files\lib\WTL</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\atlwinx.h">
+      <Filter>Header Files\lib\WTL</Filter>
+    </ClInclude>
+    <ClInclude Include="search_data_dlg.h">
       <Filter>Header Files\View</Filter>
     </ClInclude>
   </ItemGroup>

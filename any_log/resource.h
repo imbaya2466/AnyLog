@@ -9,6 +9,7 @@
 #define IDD_ADDFORMAT_DLG               203
 #define IDR_RCLICK_MENU                 206
 #define IDD_DIALOG_MOREINFO             207
+#define IDD_DIALOG_SEARCH               209
 #define IDC_LIST_FORMAT                 1000
 #define IDC_OK_FORMAT                   1001
 #define IDC_CANCEL_FORMAT               1002
@@ -33,6 +34,11 @@
 #define IDC_BUTTON1_MOREINFO            1024
 #define IDC_BUTTON2_MOREINFO            1025
 #define IDC_EDIT_MOREINFO_OUT           1026
+#define ID_SEARCHDLG_OK                 1027
+#define ID_SEARCHDLG_CANCEL             1028
+#define IDC_SEARCHDLG_ADD               1029
+#define IDC_SEARCHDLG_LIST              1030
+#define IDC_SEARCHDLG_DELETE            1031
 #define ID_WINDOW_CLOSE                 32772
 #define ID_WINDOW_CLOSE_ALL             32773
 #define ID_OPEN_FORMAT                  32775
@@ -41,6 +47,7 @@
 #define ID_MARK_COPY                    32778
 #define ID_RCLICK_COPY                  32779
 #define ID_RCLICK_MARK                  32780
+#define ID_OPEN_FILTERSAVED             32781
 #define ID_RCLICK_INTERVAL_FROM         40000
 #define ID_RCLICK_INTERVAL_TO           40001
 #define ID_RCLICK_MORE_INFO             40002
@@ -52,9 +59,9 @@
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        209
-#define _APS_NEXT_COMMAND_VALUE         32781
-#define _APS_NEXT_CONTROL_VALUE         1027
+#define _APS_NEXT_RESOURCE_VALUE        211
+#define _APS_NEXT_COMMAND_VALUE         32782
+#define _APS_NEXT_CONTROL_VALUE         1032
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
 #endif

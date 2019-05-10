@@ -5,6 +5,7 @@
 #pragma once
 
 #include "middle_layer.h"
+#include "filter_data.h"
 
 class CView : public CDialogImpl<CView>
 {
@@ -93,8 +94,10 @@ public:
   LRESULT OnRclickMenu(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/, BOOL& /*bHandled*/);
   LRESULT OnEnKillfocusEdit(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/, BOOL& /*bHandled*/);
   LRESULT OnNMRclickCopyEdit(int /*idCtrl*/, LPNMHDR pNMHDR, BOOL& /*bHandled*/);
+  LRESULT OnNMClickViewList(int /*idCtrl*/, LPNMHDR pNMHDR, BOOL& /*bHandled*/);
   void ScrollTo(int line);
   void SetBackgroundColour(COLORREF in_colour);
   
-  LRESULT OnNMClickViewList(int /*idCtrl*/, LPNMHDR pNMHDR, BOOL& /*bHandled*/);
+  void SetAndSearch(FilterData& filter_data);
+  FilterData GetSearch();
 };

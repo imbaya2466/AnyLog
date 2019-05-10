@@ -12,6 +12,7 @@
 #include "View.h"
 #include "MainFrm.h"
 #include "format_dlg.h"
+#include "search_data_dlg.h"
 
 
 BOOL CMainFrame::PreTranslateMessage(MSG* pMsg)
@@ -67,7 +68,8 @@ LRESULT CMainFrame::OnCreate(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM /*lParam*/
 
 	//read db
   format_manage_.ReadDB();
-
+  filter_data_manage_.set_db(format_manage_.get_db());
+  filter_data_manage_.ReadDB();
 	return 0;
 }
 
@@ -80,7 +82,9 @@ LRESULT CMainFrame::OnDestroy(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM /*lParam*
 	pLoop->RemoveIdleHandler(this);
 
   //write db
+  filter_data_manage_.WriteDB();
   format_manage_.WriteDB();
+  
 
   m_view.RemoveAllPages();
 	bHandled = FALSE;
@@ -194,6 +198,20 @@ LRESULT CMainFrame::OnChangeBackground(WORD /*wNotifyCode*/, WORD wID, HWND /*hW
     pcview->SetBackgroundColour(RGB(0xF2, 0xF3, 0xF5));
   }
   pcview->RedrawWindow();
+
+  return 0;
+}
+
+LRESULT CMainFrame::OnOpenFilterSaved(WORD, WORD, HWND, BOOL &)
+{
+  int index = m_view.GetActivePage();
+  if (index < 0) {
+    return 0;
+  }
+  CView* pcview = (CView*)m_view.GetPageData(index);
+
+  SearchDataDlg dlg(filter_data_manage_.get_list(), pcview);
+  dlg.DoModal();
 
   return 0;
 }

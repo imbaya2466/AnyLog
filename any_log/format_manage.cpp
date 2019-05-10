@@ -125,3 +125,8 @@ void FormatManage::set_choose_format(unsigned choose_format)
   choose_format_ = choose_format;
 }
 
+sqlite3 * FormatManage::get_db()
+{
+  return db_;
+}
+

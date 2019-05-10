@@ -6,7 +6,7 @@
 
 
 #include "format_manage.h"
-
+#include "filter_data_manage.h"
 
 #define WINDOW_MENU_POSITION	3
 
@@ -22,6 +22,7 @@ public:
 	CTabView m_view;
 	CCommandBarCtrl m_CmdBar;
 	FormatManage format_manage_;
+  FilterDataManage filter_data_manage_;
 
 	virtual BOOL PreTranslateMessage(MSG* pMsg);
 	virtual BOOL OnIdle();
@@ -45,6 +46,7 @@ public:
 		COMMAND_RANGE_HANDLER(ID_WINDOW_TABFIRST, ID_WINDOW_TABLAST, OnWindowActivate)
     COMMAND_ID_HANDLER(ID_TOOLBAR_WHITE, OnChangeBackground)
     COMMAND_ID_HANDLER(ID_TOOLBAR_BLACK, OnChangeBackground)
+    COMMAND_ID_HANDLER(ID_OPEN_FILTERSAVED, OnOpenFilterSaved)
     MESSAGE_HANDLER(WM_DROPFILES, OnDropFiels)
 		CHAIN_MSG_MAP(CUpdateUI<CMainFrame>)
 		NOTIFY_CODE_HANDLER(TBVN_CONTEXTMENU, OnTabViewContextMenu)
@@ -68,6 +70,7 @@ public:
 	LRESULT OnWindowCloseAll(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/, BOOL& /*bHandled*/);
 	LRESULT OnWindowActivate(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/, BOOL& /*bHandled*/);
   LRESULT OnChangeBackground(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/, BOOL& /*bHandled*/);
+  LRESULT OnOpenFilterSaved(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/, BOOL& /*bHandled*/);
   LRESULT OnDropFiels(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM /*lParam*/, BOOL& /*bHandled*/);
 
 	LRESULT OnTabViewContextMenu(int /*idCtrl*/, LPNMHDR pnmh, BOOL& /*bHandled*/);

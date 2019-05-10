@@ -38,8 +38,8 @@ class FormatManage {
   
   int size();
 	void set_choose_format(unsigned choose_format);
-  // only used to show
-	
+  
+  sqlite3 *get_db();
 
  private:
 	std::vector<LogFormat> log_format_list_;

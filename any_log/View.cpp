@@ -310,6 +310,22 @@ void CView::SetBackgroundColour(COLORREF in_colour)
   list_.SetBkColor(in_colour);
 }
 
+void CView::SetAndSearch(FilterData &filter_data) 
+{
+  search_edit_.SetWindowTextA(filter_data.val.c_str());
+  regex_check_.SetCheck(filter_data.regex);
+  search_button_.Click();
+}
+
+FilterData CView::GetSearch() { 
+  FilterData ret;
+  TCHAR sz_string[MAX_STRING];
+  search_edit_.GetLine(0, sz_string, MAX_STRING);
+  ret.val = sz_string;
+  ret.regex = regex_check_.GetCheck();
+  return ret;
+}
+
 //not Global var  these var only used in this moudle
 static std::vector<int> rclick_choose;
 static int focused;

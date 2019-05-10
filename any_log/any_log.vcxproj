@@ -40,13 +40,13 @@
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
+    <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
+    <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -68,14 +68,14 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);D:\lib\Include;</IncludePath>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);D:\lib\Include;</IncludePath>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
@@ -113,7 +113,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
@@ -172,7 +172,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <ExceptionHandling />
@@ -202,6 +202,7 @@
     <ClCompile Include="AboutDlg.cpp" />
     <ClCompile Include="add_format_dlg.cpp" />
     <ClCompile Include="any_log.cpp" />
+    <ClCompile Include="filter_data_manage.cpp" />
     <ClCompile Include="format_dlg.cpp" />
     <ClCompile Include="format_manage.cpp" />
     <ClCompile Include="log.cpp" />
@@ -210,6 +211,7 @@
     <ClCompile Include="loop_filter.cpp" />
     <ClCompile Include="MainFrm.cpp" />
     <ClCompile Include="middle_layer.cpp" />
+    <ClCompile Include="search_data_dlg.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -222,8 +224,30 @@
   <ItemGroup>
     <ClInclude Include="AboutDlg.h" />
     <ClInclude Include="add_format_dlg.h" />
+    <ClInclude Include="filter_data.h" />
+    <ClInclude Include="filter_data_manage.h" />
     <ClInclude Include="format_dlg.h" />
     <ClInclude Include="format_manage.h" />
+    <ClInclude Include="lib\atlapp.h" />
+    <ClInclude Include="lib\atlcrack.h" />
+    <ClInclude Include="lib\atlctrls.h" />
+    <ClInclude Include="lib\atlctrlw.h" />
+    <ClInclude Include="lib\atlctrlx.h" />
+    <ClInclude Include="lib\atlddx.h" />
+    <ClInclude Include="lib\atldlgs.h" />
+    <ClInclude Include="lib\atldwm.h" />
+    <ClInclude Include="lib\atlfind.h" />
+    <ClInclude Include="lib\atlframe.h" />
+    <ClInclude Include="lib\atlgdi.h" />
+    <ClInclude Include="lib\atlmisc.h" />
+    <ClInclude Include="lib\atlprint.h" />
+    <ClInclude Include="lib\atlres.h" />
+    <ClInclude Include="lib\atlribbon.h" />
+    <ClInclude Include="lib\atlscrl.h" />
+    <ClInclude Include="lib\atlsplit.h" />
+    <ClInclude Include="lib\atltheme.h" />
+    <ClInclude Include="lib\atluser.h" />
+    <ClInclude Include="lib\atlwinx.h" />
     <ClInclude Include="log.h" />
     <ClInclude Include="log_format.h" />
     <ClInclude Include="log_more_info_dlg.h" />
@@ -232,6 +256,7 @@
     <ClInclude Include="MainFrm.h" />
     <ClInclude Include="middle_layer.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="search_data_dlg.h" />
     <ClInclude Include="sqlite3.h" />
     <ClInclude Include="sqlite3ext.h" />
     <ClInclude Include="stdafx.h" />
