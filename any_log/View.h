@@ -48,6 +48,7 @@ public:
     COMMAND_ID_HANDLER(ID_RCLICK_MORE_INFO, OnRclickMenu)
     COMMAND_ID_HANDLER(ID_RCLICK_FIND_TEXT, OnRclickMenu)
     COMMAND_ID_HANDLER(ID_RCLICK_ADDTO_EDIT, OnRclickMenu)
+    COMMAND_ID_HANDLER(ID_RCLICK_SAVEDATA_FILE, OnRclickMenu)
     //copy edit
     COMMAND_CODE_HANDLER(EN_KILLFOCUS, OnEnKillfocusEdit)
     NOTIFY_CODE_HANDLER(EN_MSGFILTER, OnNMRclickCopyEdit)
@@ -100,4 +101,7 @@ public:
   
   void SetAndSearch(FilterData& filter_data);
   FilterData GetSearch();
+
+  std::string GetSaveFile();
+  void AllSaveFile(std::string name);
 };

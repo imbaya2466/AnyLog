@@ -45,15 +45,6 @@
     <ClCompile Include="stdafx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="AboutDlg.cpp">
-      <Filter>Source Files\View</Filter>
-    </ClCompile>
-    <ClCompile Include="MainFrm.cpp">
-      <Filter>Source Files\View</Filter>
-    </ClCompile>
-    <ClCompile Include="View.cpp">
-      <Filter>Source Files\View</Filter>
-    </ClCompile>
     <ClCompile Include="any_log.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -90,6 +81,21 @@
     <ClCompile Include="search_data_dlg.cpp">
       <Filter>Source Files\View</Filter>
     </ClCompile>
+    <ClCompile Include="input_name_dlg.cpp">
+      <Filter>Source Files\View</Filter>
+    </ClCompile>
+    <ClCompile Include="search_newdata_dlg.cpp">
+      <Filter>Source Files\View</Filter>
+    </ClCompile>
+    <ClCompile Include="view.cpp">
+      <Filter>Source Files\View</Filter>
+    </ClCompile>
+    <ClCompile Include="main_frm.cpp">
+      <Filter>Source Files\View</Filter>
+    </ClCompile>
+    <ClCompile Include="about_dlg.cpp">
+      <Filter>Source Files\View</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -97,15 +103,6 @@
     </ClInclude>
     <ClInclude Include="resource.h">
       <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="AboutDlg.h">
-      <Filter>Header Files\View</Filter>
-    </ClInclude>
-    <ClInclude Include="MainFrm.h">
-      <Filter>Header Files\View</Filter>
-    </ClInclude>
-    <ClInclude Include="View.h">
-      <Filter>Header Files\View</Filter>
     </ClInclude>
     <ClInclude Include="log_format.h">
       <Filter>Header Files\Model</Filter>
@@ -210,6 +207,21 @@
       <Filter>Header Files\lib\WTL</Filter>
     </ClInclude>
     <ClInclude Include="search_data_dlg.h">
+      <Filter>Header Files\View</Filter>
+    </ClInclude>
+    <ClInclude Include="input_name_dlg.h">
+      <Filter>Header Files\View</Filter>
+    </ClInclude>
+    <ClInclude Include="search_newdata_dlg.h">
+      <Filter>Header Files\View</Filter>
+    </ClInclude>
+    <ClInclude Include="about_dlg.h">
+      <Filter>Header Files\View</Filter>
+    </ClInclude>
+    <ClInclude Include="view.h">
+      <Filter>Header Files\View</Filter>
+    </ClInclude>
+    <ClInclude Include="main_frm.h">
       <Filter>Header Files\View</Filter>
     </ClInclude>
   </ItemGroup>

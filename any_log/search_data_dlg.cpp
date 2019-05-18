@@ -14,8 +14,10 @@
 #include "tool.h"
 
 #include "search_data_dlg.h"
+#include "input_name_dlg.h"
+#include "search_newdata_dlg.h"
 
-// BUG?
+
 LRESULT SearchDataDlg::OnInitDialog(UINT, WPARAM, LPARAM, BOOL &) {
   list_.Attach(GetDlgItem(IDC_SEARCHDLG_LIST));
 
@@ -39,8 +41,28 @@ LRESULT SearchDataDlg::OnClose(UINT, WPARAM wParam, LPARAM, BOOL &) {
 }
 
 LRESULT SearchDataDlg::OnBnClickedAdd(WORD, WORD wID, HWND, BOOL &) {
-  FilterData data = pcview_->GetSearch();
-  data.name = std::to_string(data_.size());
+
+  FilterData data; 
+  switch (wID) {
+    case IDC_SEARCHDLG_ADDNEW:
+    {
+      SearchNewDataDlg dlg(data);
+      dlg.DoModal();
+      break;
+    }
+    case IDC_SEARCHDLG_ADDNOW:
+    {
+      std::string name;
+      data = pcview_->GetSearch();
+      InputNameDlg dlg(name);
+      dlg.DoModal();
+      data.name = name;
+      break;
+    }
+    default:
+      break;
+  }
+  
   data_.push_back(data);
   list_.SetItemCount(data_.size());
   list_.RedrawWindow();
@@ -70,6 +92,7 @@ LRESULT SearchDataDlg::OnBnClickedOk(WORD, WORD wID, HWND, BOOL &) {
   }
   pcview_->SetAndSearch(data_[select]);
   EndDialog(wID);
+  return 0;
 }
 
 LRESULT SearchDataDlg::OnLvnGetdispinfoList(int, LPNMHDR pNMHDR, BOOL &) {

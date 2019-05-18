@@ -66,7 +66,7 @@ int MiddleLayer::ReadStream(int num)
           break;
         }
         else{
-          new_log_readed = new_log_readed + "\n" + line;
+          new_log_readed = new_log_readed + "  " +line;
         }
 
       }

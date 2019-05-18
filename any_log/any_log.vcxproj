@@ -199,19 +199,21 @@
     </Midl>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="AboutDlg.cpp" />
+    <ClCompile Include="about_dlg.cpp" />
     <ClCompile Include="add_format_dlg.cpp" />
     <ClCompile Include="any_log.cpp" />
     <ClCompile Include="filter_data_manage.cpp" />
     <ClCompile Include="format_dlg.cpp" />
     <ClCompile Include="format_manage.cpp" />
+    <ClCompile Include="input_name_dlg.cpp" />
     <ClCompile Include="log.cpp" />
     <ClCompile Include="log_more_info_dlg.cpp" />
     <ClCompile Include="log_storage_loop.cpp" />
     <ClCompile Include="loop_filter.cpp" />
-    <ClCompile Include="MainFrm.cpp" />
+    <ClCompile Include="main_frm.cpp" />
     <ClCompile Include="middle_layer.cpp" />
     <ClCompile Include="search_data_dlg.cpp" />
+    <ClCompile Include="search_newdata_dlg.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -219,15 +221,16 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="tool.cpp" />
-    <ClCompile Include="View.cpp" />
+    <ClCompile Include="view.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AboutDlg.h" />
+    <ClInclude Include="about_dlg.h" />
     <ClInclude Include="add_format_dlg.h" />
     <ClInclude Include="filter_data.h" />
     <ClInclude Include="filter_data_manage.h" />
     <ClInclude Include="format_dlg.h" />
     <ClInclude Include="format_manage.h" />
+    <ClInclude Include="input_name_dlg.h" />
     <ClInclude Include="lib\atlapp.h" />
     <ClInclude Include="lib\atlcrack.h" />
     <ClInclude Include="lib\atlctrls.h" />
@@ -253,15 +256,16 @@
     <ClInclude Include="log_more_info_dlg.h" />
     <ClInclude Include="log_storage_loop.h" />
     <ClInclude Include="loop_filter.h" />
-    <ClInclude Include="MainFrm.h" />
+    <ClInclude Include="main_frm.h" />
     <ClInclude Include="middle_layer.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="search_data_dlg.h" />
+    <ClInclude Include="search_newdata_dlg.h" />
     <ClInclude Include="sqlite3.h" />
     <ClInclude Include="sqlite3ext.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="tool.h" />
-    <ClInclude Include="View.h" />
+    <ClInclude Include="view.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="any_log.rc" />

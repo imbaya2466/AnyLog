@@ -5,7 +5,7 @@
 #include "stdafx.h"
 #include "resource.h"
 
-#include "aboutdlg.h"
+#include "about_dlg.h"
 
 LRESULT CAboutDlg::OnInitDialog(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM /*lParam*/, BOOL& /*bHandled*/)
 {

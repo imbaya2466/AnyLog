@@ -6,8 +6,8 @@
 #include "resource.h"
 
 #include "View.h"
-#include "aboutdlg.h"
-#include "MainFrm.h"
+#include "about_dlg.h"
+#include "main_frm.h"
 
 
 

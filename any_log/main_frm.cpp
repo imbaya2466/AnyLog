@@ -8,9 +8,9 @@
 #include "stdafx.h"
 #include "resource.h"
 
-#include "aboutdlg.h"
+#include "about_dlg.h"
 #include "View.h"
-#include "MainFrm.h"
+#include "main_frm.h"
 #include "format_dlg.h"
 #include "search_data_dlg.h"
 
@@ -121,6 +121,17 @@ LRESULT CMainFrame::OnFileNew(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl
     CteatFileTabView(strFilename);
   }
 	return 0;
+}
+
+LRESULT CMainFrame::OnSaveFile(WORD, WORD, HWND, BOOL&) { 
+  int index = m_view.GetActivePage();
+  if (index < 0) {
+    return 0;
+  }
+  CView* pcview = (CView*)m_view.GetPageData(index);
+  std::string file = pcview->GetSaveFile();
+  pcview->AllSaveFile(file);
+  return 0; 
 }
 
 LRESULT CMainFrame::OnOpenForamt(WORD, WORD, HWND, BOOL &)
@@ -278,14 +289,16 @@ void CMainFrame::CteatFileTabView(std::string file)
 
     CView* pView = new CView(format_manage_.GetChooseFormat(), pstream, status_bar_);
     pView->Create(m_view);
-    m_view.AddPage(pView->m_hWnd, file.c_str(), -1, (void*)pView);
+
+    int start = file.rfind("\\");
+    std::string name=file.substr(start+1);
+    m_view.AddPage(pView->m_hWnd, name.c_str(), -1, (void*)pView);
     pView->SetBackgroundColour(RGB(0xF2, 0xF3, 0xF5));
     pView->RedrawWindow();
   }
   else {
     FormatDlg dlg(format_manage_);
     dlg.DoModal();
-    CteatFileTabView(file);
   }
 }
 
